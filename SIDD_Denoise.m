@@ -1,4 +1,4 @@
-function [] = SIDD_Denoise(Denoiser, SiddDataDir, RawOrSrgb, OptionalData)
+function [] = SIDD_Denoise(Denoiser, SiddDataDir, RawOrSrgb, OptionalData, Method)
 
 % SIDD_DENOISE Evaluates a Denoiser on the SIDD Benchmark
 
@@ -43,6 +43,14 @@ switch RawOrSrgb
         fprintf('Done!\n');
         
     case 'srgb'
+        if Method == 'cbm3d'
+            [DenoisedBlocksSrgb, TimeMPSrgb] = Denoise_CBM3D(Denoiser, SiddDataDir);
+        fprintf('Saving resutls...\n');
+
+        save(fullfile(submitDir, OptionalData.SaveName), 'DenoisedBlocksSrgb', ...
+            'TimeMPSrgb', 'OptionalData', '-v7.3');
+        fprintf('Done!\n');
+        end 
         
         [DenoisedBlocksSrgb, TimeMPSrgb] = DenoiseSrgb(Denoiser, SiddDataDir);
         fprintf('Saving resutls...\n');
