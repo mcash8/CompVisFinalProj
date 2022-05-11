@@ -5,7 +5,7 @@ load(gt_dir, "-mat", 'ValidationGtBlocksSrgb');
 %baseline results DIR 
 baseline_dir = 'D:\SIDD\Results\'; 
 
-methods = {'gamma', 'clahe', 'histogramequalization', 'cbm3d'}; 
+methods = {'gamma', 'clahe', 'histogramequalization', 'cbm3d', 'NN'}; 
 
 nImages = 40; 
 nBlocks = 32;
