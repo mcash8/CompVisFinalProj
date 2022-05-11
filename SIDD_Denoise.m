@@ -27,14 +27,14 @@ function [] = SIDD_Denoise(Denoiser, SiddDataDir, RawOrSrgb, OptionalData, Metho
 % output directory to save the denoised blocks in either of two files 
 % "SubmitRaw.mat" or "SubmitSrgb.mat"
 % these files should be submitted for evaluation
-submitDir = fullfile(SiddDataDir, '..', 'Submit');
+submitDir = fullfile(SiddDataDir, '..', 'Results');
 if ~exist(submitDir, 'dir'), mkdir(submitDir); end
 
 % call DenoiseRaw or DenoiseSrgb to perform the denoising
 % save the denoised blocks and optional data
 switch RawOrSrgb
     
-    case 'raw'
+    case 'raw' %not necessary for our project
     
         [DenoisedBlocksRaw, TimeMPRaw] = DenoiseRaw(Denoiser, SiddDataDir);
         fprintf('Saving resutls...\n');
@@ -43,22 +43,23 @@ switch RawOrSrgb
         fprintf('Done!\n');
         
     case 'srgb'
-        if Method == 'cbm3d'
-            [DenoisedBlocksSrgb, TimeMPSrgb] = Denoise_CBM3D(Denoiser, SiddDataDir);
-        fprintf('Saving resutls...\n');
-
-        save(fullfile(submitDir, OptionalData.SaveName), 'DenoisedBlocksSrgb', ...
-            'TimeMPSrgb', 'OptionalData', '-v7.3');
-        fprintf('Done!\n');
-        end 
-        
-        [DenoisedBlocksSrgb, TimeMPSrgb] = DenoiseSrgb(Denoiser, SiddDataDir);
-        fprintf('Saving resutls...\n');
-
-        save(fullfile(submitDir, OptionalData.SaveName), 'DenoisedBlocksSrgb', ...
-            'TimeMPSrgb', 'OptionalData', '-v7.3');
-        fprintf('Done!\n');
+        if strcmp(Method, 'cbm3d')
+                [DenoisedBlocksSrgb, TimeMPSrgb] = Denoise_CBM3D(Denoiser, SiddDataDir);
+            fprintf('Saving resutls...\n');
     
+            save(fullfile('D:\SIDD\Results\', OptionalData.SaveName), 'DenoisedBlocksSrgb', ...
+                'TimeMPSrgb', 'OptionalData', '-v7.3');
+            fprintf('Done!\n');
+
+        else 
+        [DenoisedBlocksSrgb, TimeMPSrgb] = DenoiseMat(Denoiser, SiddDataDir);
+        fprintf('Saving resutls...\n');
+
+        save(fullfile('D:\SIDD\Results\', OptionalData.SaveName), 'DenoisedBlocksSrgb', ...
+            'TimeMPSrgb', 'OptionalData', '-v7.3');
+        fprintf('Done!\n');
+        end
+       
     otherwise
         
         disp('Invalid RawOrSrgb value!');
