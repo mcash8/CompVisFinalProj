@@ -57,9 +57,10 @@ Submit.py: Tests the NN trained on SIDD dataset.
 /models: folder with pretrianed model 
 /utils: support files for training
 
+Code was adapted from [3]. As a last resort, you can download the entire repository from [3] and run the code. 
 
 Code credits: 
-https://www.eecs.yorku.ca/~kamel/sidd/benchmark.php -- used benchmark code to automate 
-https://github.com/glemaitre/BM3D/blob/master/CBM3D.m -- used for CBM3D.m and dependencies
-https://github.com/JiaHongZ/DRNet -- used for training, testing and evaluating NN
+[1] https://www.eecs.yorku.ca/~kamel/sidd/benchmark.php -- used benchmark code to automate 
+[2] https://github.com/glemaitre/BM3D/blob/master/CBM3D.m -- used for CBM3D.m and dependencies
+[3] https://github.com/JiaHongZ/DRNet -- used for training, testing and evaluating NN
 
